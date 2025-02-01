@@ -1,0 +1,36 @@
+<header class="header">
+  <div class="brand">
+    <a routerLink="/">Quick Brew Café</a>
+  </div>
+  <nav class="nav-links">
+    <!-- Left Side Navigation -->
+    <div class="nav-group left">
+      <a routerLink="/menu" routerLinkActive="active">Menu</a>
+      <app-mini-cart></app-mini-cart>
+      <ng-container *ngIf="isLoggedIn">
+        <a routerLink="/reviews" routerLinkActive="active">Reviews</a>
+      </ng-container>
+    </div>
+
+    <!-- Right Side Navigation -->
+    <div class="nav-group right">
+      <ng-container *ngIf="isLoggedIn">
+        <a routerLink="/rewards" routerLinkActive="active">
+          <i class="fas fa-star"></i> Rewards
+        </a>
+        <a routerLink="/profile" routerLinkActive="active">
+          <i class="fas fa-user"></i> Profile
+        </a>
+        <a routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin">
+          <i class="fas fa-cog"></i> Admin
+        </a>
+        <button class="logout-btn" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </ng-container>
+      <a routerLink="/auth/login" routerLinkActive="active" *ngIf="!isLoggedIn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </a>
+    </div>
+  </nav>
+</header>

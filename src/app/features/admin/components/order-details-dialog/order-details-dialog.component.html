@@ -1,0 +1,26 @@
+<div class="dialog-overlay" *ngIf="isVisible" (click)="hide()">
+  <div class="dialog-content" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h2>Order Details</h2>
+      <button class="close-button" (click)="hide()">×</button>
+    </div>
+    
+    <div class="dialog-body">
+      <div class="order-info">
+        <p><strong>Order ID:</strong> {{order.id}}</p>
+        <p><strong>Customer:</strong> {{order.customerName}}</p>
+        <p><strong>Status:</strong> {{order.status}}</p>
+        <p><strong>Date:</strong> {{order.date | date:'medium'}}</p>
+      </div>
+
+      <div class="order-items">
+        <h3>Items</h3>
+        <app-order-summary [items]="order.items"></app-order-summary>
+      </div>
+
+      <div class="order-total">
+        <p><strong>Total:</strong> {{order.total | currency}}</p>
+      </div>
+    </div>
+  </div>
+</div>

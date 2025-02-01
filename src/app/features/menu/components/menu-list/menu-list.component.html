@@ -1,0 +1,34 @@
+<div class="menu-container">
+  <div class="notification" *ngIf="showNotification()">
+    {{ notificationMessage() }}
+  </div>
+  <div class="search-container">
+    <input 
+      type="text" 
+      [formControl]="searchControl"
+      placeholder="Search coffees..."
+      class="search-input"
+    >
+  </div>
+
+  <div *ngIf="loading()" class="loading">
+    Loading coffees...
+  </div>
+
+  <div *ngIf="!loading()" class="coffee-grid">
+    <ng-container *ngIf="coffees().length > 0; else noCoffees">
+      <app-coffee-card
+        *ngFor="let coffee of coffees()"
+        [coffee]="coffee"
+        (orderCoffee)="onOrderCoffee($event)"
+        (click)="onCardClick($event, coffee)"
+      ></app-coffee-card>
+    </ng-container>
+
+    <ng-template #noCoffees>
+      <div class="no-results">
+        No coffees found matching your search.
+      </div>
+    </ng-template>
+  </div>
+</div>

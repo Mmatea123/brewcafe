@@ -1,0 +1,7 @@
+<div class="coffee-details" *ngIf="coffeeService.currentCoffee() as coffee">
+  <app-coffee-card 
+    [coffee]="coffee"
+    (orderCoffee)="onOrderCoffee(coffee)">
+  </app-coffee-card>
+  <button (click)="goBack()">Back to Menu</button>
+</div>

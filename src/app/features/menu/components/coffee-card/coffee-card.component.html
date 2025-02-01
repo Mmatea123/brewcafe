@@ -1,0 +1,15 @@
+<div class="coffee-card" (click)="onOrder()">
+  <div class="coffee-image">
+    <img [src]="coffee.image" [alt]="coffee.name">
+  </div>
+  <div class="coffee-info">
+    <h3>{{ coffee.name }}</h3>
+    <p class="description">{{ coffee.description }}</p>
+    <div class="price-order">
+      <span class="price">${{ coffee.price.toFixed(2) }}</span>
+      <button class="order-btn" (click)="$event.stopPropagation(); onOrder()">
+        Order Now
+      </button>
+    </div>
+  </div>
+</div>

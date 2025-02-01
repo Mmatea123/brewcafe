@@ -1,0 +1,82 @@
+<div class="order-container">
+  <div class="order-card">
+    <h2 class="order-title">Complete Your Order</h2>
+    <app-order-summary [items]="(orderItems$ | async) ?? []"></app-order-summary>
+
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-form">
+      <div class="form-group">
+        <label for="customerName">Name</label>
+        <div class="input-container" [class.error]="isFieldInvalid('customerName')">
+          <i class="fas fa-user"></i>
+          <input
+            id="customerName"
+            type="text"
+            formControlName="customerName"
+            class="form-control"
+            placeholder="Enter your name">
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('customerName')">
+          <span *ngIf="orderForm.get('customerName')?.errors?.['required']">Name is required</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-container" [class.error]="isFieldInvalid('email')">
+          <i class="fas fa-envelope"></i>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="Enter your email">
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('email')">
+          <span *ngIf="orderForm.get('email')?.errors?.['required']">Email is required</span>
+          <span *ngIf="orderForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone (Optional)</label>
+        <div class="input-container" [class.error]="isFieldInvalid('phone')">
+          <i class="fas fa-phone"></i>
+          <input
+            id="phone"
+            type="tel"
+            formControlName="phone"
+            class="form-control"
+            placeholder="Enter your phone number">
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('phone')">
+          <span *ngIf="orderForm.get('phone')?.errors?.['pattern']">Please enter a valid phone number</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Special Instructions (Optional)</label>
+        <div class="input-container">
+          <i class="fas fa-comment"></i>
+          <textarea
+            id="notes"
+            formControlName="notes"
+            class="form-control"
+            placeholder="Any special instructions for your order"
+            rows="3">
+          </textarea>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="cancel-button" (click)="onCancel()">
+          <span>Cancel Order</span>
+          <i class="fas fa-times"></i>
+        </button>
+        <button type="submit" [disabled]="!orderForm.valid" class="order-button">
+          <span>Place Order</span>
+          <i class="fas fa-check"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

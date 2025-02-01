@@ -1,0 +1,58 @@
+<div class="order-management">
+  <div class="filters">
+    <select [(ngModel)]="statusFilter">
+      <option value="all">
+        <i class="fas fa-filter"></i> All Orders
+      </option>
+      <option value="pending">Pending Orders</option>
+      <option value="processing">Processing Orders</option>
+      <option value="completed">Completed Orders</option>
+      <option value="cancelled">Cancelled Orders</option>
+    </select>
+  </div>
+
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th><i class="fas fa-hashtag"></i> Order ID</th>
+        <th><i class="fas fa-user"></i> Customer</th>
+        <th><i class="fas fa-coffee"></i> Items</th>
+        <th><i class="fas fa-dollar-sign"></i> Total</th>
+        <th><i class="fas fa-clock"></i> Status</th>
+        <th><i class="fas fa-cog"></i> Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of filteredOrders">
+        <td>#{{order.id}}</td>
+        <td>{{order.customerName}}</td>
+        <td>
+          <div class="order-items">
+            <div *ngFor="let item of order.items" class="item">
+              <span class="item-name">{{item.name}}</span>
+              <span class="item-quantity">×{{item.quantity}}</span>
+            </div>
+          </div>
+        </td>
+        <td>{{order.total | currency}}</td>
+        <td>
+          <select class="status-select" [(ngModel)]="order.status"
+                  (change)="updateOrderStatus(order)"
+                  [value]="order.status">
+            <option value="Pending">Pending</option>
+            <option value="Processing">Processing</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </td>
+        <td>
+          <button class="view" (click)="viewOrderDetails(order)">
+            <i class="fas fa-eye"></i> View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-order-details-dialog></app-order-details-dialog>

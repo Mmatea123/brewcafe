@@ -1,0 +1,39 @@
+<div class="dashboard">
+  <h2 class="dashboard-title">Dashboard Overview</h2>
+  <div class="stats-grid">
+    <div class="stat-card orders">
+      <div class="icon-container">
+        <i class="fas fa-shopping-bag"></i>
+      </div>
+      <div class="stat-content">
+        <h3>Total Orders</h3>
+        <p class="stat">{{totalOrders | number}}</p>
+        <p class="label">Lifetime Orders</p>
+      </div>
+    </div>
+    <div class="stat-card revenue">
+      <div class="icon-container">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="stat-content">
+        <h3>Revenue</h3>
+        <p class="stat">{{totalRevenue | currency}}</p>
+        <p class="label">Total Earnings</p>
+      </div>
+    </div>
+    <div class="stat-card products">
+      <div class="icon-container">
+        <i class="fas fa-mug-hot"></i>
+      </div>
+      <div class="stat-content">
+        <h3>Products</h3>
+        <p class="stat">{{totalProducts}}</p>
+        <p class="label">Active Menu Items</p>
+      </div>
+    </div>
+  </div>
+  <div class="orders-section">
+    <h3 class="section-title">Order Management</h3>
+    <app-order-management></app-order-management>
+  </div>
+</div>

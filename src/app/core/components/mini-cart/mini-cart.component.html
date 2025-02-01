@@ -1,0 +1,68 @@
+<div class="mini-cart">
+  <button class="cart-toggle" (click)="toggleCart()" [@fadeInOut]>
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-count" *ngIf="(cartItems$ | async)?.length" [@fadeInOut]>
+      {{ (cartItems$ | async)?.length }}
+    </span>
+  </button>
+
+  <div class="cart-dropdown" *ngIf="isOpen" [@slideInOut]>
+    <div class="cart-header">
+      <h3>Shopping Cart</h3>
+      <button class="close-btn" (click)="toggleCart()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="cart-items" *ngIf="(cartItems$ | async) as items">
+      <div *ngIf="items.length === 0" class="empty-cart" [@fadeInOut]>
+        Your cart is empty
+      </div>
+
+      <div *ngFor="let item of items" class="cart-item" 
+           [@fadeInOut]
+           [class.removing]="animatingItem === item.id">
+        <div class="item-info">
+          <div class="item-details">
+            <span class="item-name">{{ item.name }}</span>
+            <span class="item-price">${{ item.price | number:'1.2-2' }} each</span>
+          </div>
+          <span class="item-subtotal">
+            Subtotal: ${{ getItemTotal(item) | number:'1.2-2' }}
+          </span>
+        </div>
+        
+        <div class="item-actions">
+          <div class="quantity-controls">
+            <button (click)="updateQuantity(item, -1)" [disabled]="item.quantity <= 1">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="updateQuantity(item, 1)" [disabled]="item.quantity >= 10">+</button>
+          </div>
+          <button class="remove-btn" (click)="removeItem(item.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-footer" *ngIf="(cartItems$ | async)?.length">
+      <div class="cart-summary" *ngIf="cartSummary$ | async as summary">
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>${{ summary.subtotal | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax (8%):</span>
+          <span>${{ summary.tax | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total:</span>
+          <span>${{ summary.total | number:'1.2-2' }}</span>
+        </div>
+      </div>
+      <button class="checkout-btn" (click)="checkout()">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+</div>

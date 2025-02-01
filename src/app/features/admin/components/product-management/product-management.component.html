@@ -1,0 +1,66 @@
+<div class="product-management">
+  <h2>Product Management</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" formControlName="name">
+      <div *ngIf="productForm.get('name')?.errors?.['required'] && productForm.get('name')?.touched">
+        Name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Price</label>
+      <input type="number" formControlName="price" step="0.01">
+      <div *ngIf="productForm.get('price')?.errors?.['required'] && productForm.get('price')?.touched">
+        Price is required
+      </div>
+      <div *ngIf="productForm.get('price')?.errors?.['min'] && productForm.get('price')?.touched">
+        Price must be greater than 0
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea formControlName="description"></textarea>
+      <div *ngIf="productForm.get('description')?.errors?.['required'] && productForm.get('description')?.touched">
+        Description is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Image URL</label>
+      <input type="text" formControlName="image">
+      <div *ngIf="productForm.get('image')?.errors?.['required'] && productForm.get('image')?.touched">
+        Image URL is required
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="productForm.invalid">
+      {{editingId ? 'Update' : 'Add'}} Product
+    </button>
+  </form>
+
+  <div class="products-list">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coffee of coffees">
+          <td>{{coffee.name}}</td>
+          <td>{{coffee.price | currency}}</td>
+          <td>
+            <button (click)="editProduct(coffee)">Edit</button>
+            <button (click)="deleteProduct(coffee.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

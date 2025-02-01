@@ -1,0 +1,159 @@
+.order-management {
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+
+  select {
+    padding: 0.6rem 2rem 0.6rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%238b4513' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+    background-position: calc(100% - 0.75rem) center;
+    font-size: 0.9rem;
+    color: #2c3e50;
+    appearance: none;
+    min-width: 150px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #8b4513;
+    }
+  }
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  font-size: 0.95rem;
+
+  th {
+    background: rgba(139, 69, 19, 0.1);
+    font-weight: 600;
+    color: #8b4513;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #8b4513;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    transition: background-color 0.2s ease;
+  }
+
+  tbody tr {
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(139, 69, 19, 0.05);
+      transform: translateX(5px);
+    }
+  }
+
+  .order-items {
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.2rem 0;
+
+      .item-name {
+        color: #2c3e50;
+        font-weight: 500;
+      }
+
+      .item-quantity {
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px dashed rgba(139, 69, 19, 0.1);
+      }
+    }
+  }
+}
+
+.status-select {
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: white;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  width: 130px;
+
+  &:focus {
+    outline: none;
+    border-color: #8b4513;
+  }
+
+  option {
+    padding: 0.5rem;
+  }
+}
+
+button.view {
+  padding: 0.5rem 1rem;
+  background: #8b4513;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: #6b3410;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  i {
+    font-size: 0.9rem;
+  }
+}
+
+// Status colors
+.status-select {
+  &[value="Pending"] {
+    color: #e67e22;
+  }
+  
+  &[value="Processing"] {
+    color: #3498db;
+  }
+  
+  &[value="Completed"] {
+    color: #2ecc71;
+  }
+  
+  &[value="Cancelled"] {
+    color: #e74c3c;
+  }
+}
